@@ -103,9 +103,9 @@ def _recent_reward_components(selector: RLDispatchSelector, window: int = 1000) 
     if not selector.reward_components:
         return {}
     recent = selector.reward_components[-window:]
-    keys = recent[0].keys()
+    keys = sorted({key for item in recent for key in item})
     return {
-        f"reward_component_{key}": sum(item[key] for item in recent) / len(recent)
+        f"reward_component_{key}": sum(item.get(key, 0.0) for item in recent) / len(recent)
         for key in keys
     }
 

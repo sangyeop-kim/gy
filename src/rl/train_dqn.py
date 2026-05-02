@@ -32,6 +32,18 @@ def main() -> None:
     parser.add_argument("--device", default="auto", help="auto, cpu, cuda, cuda:0, or mps")
     parser.add_argument("--fallback-policy", default="priority_cr_fifo")
     parser.add_argument("--fallback-probability", type=float, default=0.05)
+    parser.add_argument(
+        "--progress",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Print simulator and DQN training progress inside each episode.",
+    )
+    parser.add_argument(
+        "--progress-interval-events",
+        type=int,
+        default=50000,
+        help="Print progress every N processed simulator events.",
+    )
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
@@ -54,8 +66,24 @@ def main() -> None:
     base_config = SimulationConfig.from_json(args.config)
     episode_rows = []
     started = perf_counter()
+    print(
+        f"RL DQN training start episodes={args.episodes} max_lots={args.max_lots} "
+        f"eval_max_lots={args.eval_max_lots} device={agent.device} "
+        f"hidden_dim={args.hidden_dim} hidden_layers={args.hidden_layers} "
+        f"batch_size={args.batch_size}",
+        flush=True,
+    )
     for episode in range(1, args.episodes + 1):
+        episode_started = perf_counter()
         episode_seed = args.seed + episode - 1
+        print("", flush=True)
+        print("=" * 96, flush=True)
+        print(
+            f"[{episode}/{args.episodes}] train episode start seed={episode_seed} "
+            f"max_lots={args.max_lots} epsilon={agent.epsilon:.4f}",
+            flush=True,
+        )
+        print("=" * 96, flush=True)
         config = base_config.with_overrides(
             max_lots=args.max_lots,
             random_seed=episode_seed,
@@ -71,7 +99,14 @@ def main() -> None:
             fallback_probability=args.fallback_probability,
         )
         simulator = Simulator(model, config, dispatch_selector=selector)
-        result = simulator.run()
+        result = simulator.run(
+            progress_callback=(
+                _make_training_progress_callback(episode, args.episodes, selector, agent, episode_started)
+                if args.progress
+                else None
+            ),
+            progress_interval_events=args.progress_interval_events,
+        )
         avg_loss = sum(selector.losses[-100:]) / min(100, len(selector.losses)) if selector.losses else None
         row = {
             "episode": episode,
@@ -126,7 +161,19 @@ def evaluate(agent: DQNAgent, encoder: DispatchFeatureEncoder, base_config: Simu
     model = load_model(config)
     selector = RLDispatchSelector(agent, encoder, explore=False, train_online=False)
     simulator = Simulator(model, config, dispatch_selector=selector)
-    result = simulator.run()
+    print("", flush=True)
+    print("=" * 96, flush=True)
+    print(f"evaluation start max_lots={args.eval_max_lots} epsilon={agent.epsilon:.4f}", flush=True)
+    print("=" * 96, flush=True)
+    eval_started = perf_counter()
+    result = simulator.run(
+        progress_callback=(
+            _make_training_progress_callback(1, 1, selector, agent, eval_started, label="eval")
+            if args.progress
+            else None
+        ),
+        progress_interval_events=args.progress_interval_events,
+    )
     lots_df = add_lot_cqt_metrics(lots_to_frame(result.lots), simulator)
     return {
         "policy": "rl_dqn",
@@ -153,11 +200,68 @@ def _recent_reward_components(selector: RLDispatchSelector, window: int = 1000) 
     if not selector.reward_components:
         return {}
     recent = selector.reward_components[-window:]
-    keys = recent[0].keys()
+    keys = sorted({key for item in recent for key in item})
     return {
-        f"reward_component_{key}": sum(item[key] for item in recent) / len(recent)
+        f"reward_component_{key}": sum(item.get(key, 0.0) for item in recent) / len(recent)
         for key in keys
     }
+
+
+def _make_training_progress_callback(
+    episode: int,
+    total_episodes: int,
+    selector: RLDispatchSelector,
+    agent: DQNAgent,
+    started_at: float,
+    label: str = "train",
+):
+    def callback(progress: dict) -> None:
+        completed = progress["completed_lots"]
+        total_lots = progress["total_lots"]
+        ratio = completed / total_lots if total_lots else 0.0
+        avg_loss = (
+            sum(selector.losses[-100:]) / min(100, len(selector.losses))
+            if selector.losses
+            else None
+        )
+        recent_reward = (
+            sum(item["reward"] for item in selector.reward_components[-1000:])
+            / min(1000, len(selector.reward_components))
+            if selector.reward_components
+            else None
+        )
+        print(
+            f"[{episode}/{total_episodes}] {label} "
+            f"phase={progress['phase']} "
+            f"events={progress['processed_events']:,} "
+            f"sim_time={progress['sim_time']:.1f}min "
+            f"date={progress['sim_datetime']} "
+            f"ops={progress['completed_operations']:,}/{progress['started_operations']:,} "
+            f"completed={completed:,}/{total_lots:,} ({ratio:.1%}) "
+            f"waiting={progress['waiting_lots']:,} "
+            f"tools busy/idle/down={progress['busy_tools']:,}/{progress['idle_tools']:,}/{progress['down_tools']:,} "
+            f"pending_events={progress['pending_events']:,} "
+            f"decisions={selector.decisions:,} rewards={selector.rewards:,} "
+            f"replay={len(agent.replay):,} train_steps={agent.training_steps:,} "
+            f"epsilon={agent.epsilon:.4f} "
+            f"loss={avg_loss if avg_loss is not None else '-'} "
+            f"reward={recent_reward if recent_reward is not None else '-'} "
+            f"blocked={progress['blocked_reason'] or '-'} "
+            f"(elapsed {_format_seconds(perf_counter() - started_at)})",
+            flush=True,
+        )
+
+    return callback
+
+
+def _format_seconds(seconds: float) -> str:
+    if seconds < 60:
+        return f"{seconds:.1f}s"
+    minutes, secs = divmod(seconds, 60)
+    if minutes < 60:
+        return f"{int(minutes)}m {secs:.0f}s"
+    hours, minutes = divmod(minutes, 60)
+    return f"{int(hours)}h {int(minutes)}m {secs:.0f}s"
 
 
 if __name__ == "__main__":

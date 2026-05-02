@@ -63,6 +63,8 @@ python -m src.rl.train_dqn \
   --epsilon-decay 0.9995 \
   --fallback-policy priority_cr_fifo \
   --fallback-probability 0.05 \
+  --progress \
+  --progress-interval-events 50000 \
   --device auto
 ```
 
@@ -83,6 +85,8 @@ python -m src.rl.train_dqn \
   --epsilon-end 0.03 \
   --epsilon-decay 0.9997 \
   --fallback-probability 0.05 \
+  --progress \
+  --progress-interval-events 50000 \
   --device auto
 ```
 
@@ -102,6 +106,8 @@ Core parameters:
 - `--epsilon-decay`: multiplicative decay applied after each training step.
 - `--fallback-policy`: simulator fallback dispatch rule. This is also used as a weak imitation fallback when `--fallback-probability > 0`.
 - `--fallback-probability`: probability of using the fallback rule during training decisions.
+- `--progress` / `--no-progress`: print simulator and DQN progress during each episode.
+- `--progress-interval-events`: simulator event interval between progress prints.
 - `--device`: `auto`, `cpu`, `cuda`, `cuda:0`, or `mps`.
 
 Practical tuning notes:
@@ -141,6 +147,11 @@ State features:
 
 Reward:
 
+- immediate dense reward for selecting urgent low-slack/low-CR lots
+- immediate penalty for selecting a lot with avoidable setup time
+- immediate reward for selecting batch leads whose compatible quantity satisfies batch minimum
+- immediate penalty for selecting batch leads that cannot form a valid batch
+- immediate reward for selecting lots inside tight active CQT windows
 - positive reward for remaining processing reduction
 - positive reward for projected tardiness improvement
 - on-time lot completion bonus

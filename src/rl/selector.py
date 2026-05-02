@@ -76,8 +76,20 @@ class RLDispatchSelector:
             cqt_violations_before=int(simulator.cqt_counts_by_lot[selected.id].get("violations", 0)),
             cqt_passes_before=int(simulator.cqt_counts_by_lot[selected.id].get("passes", 0)),
         )
+        self._commit_immediate_reward(simulator, toolgroup, selected, candidates, tool)
         self.decisions += 1
         return selected
+
+    def _commit_immediate_reward(self, simulator, toolgroup, selected: Lot, candidates: tuple[Lot, ...], tool) -> None:
+        decision = self.pending[selected.id]
+        reward, components = self._immediate_reward(simulator, toolgroup, selected, candidates, tool)
+        self.agent.remember(decision.features, reward)
+        self.reward_components.append(components)
+        self.rewards += 1
+        if self.train_online:
+            loss = self.agent.train_step()
+            if loss is not None:
+                self.losses.append(loss)
 
     def on_lot_arrival(self, *, simulator, lot: Lot, now: float) -> None:
         decision = self.pending.pop(lot.id, None)
@@ -98,6 +110,110 @@ class RLDispatchSelector:
             loss = self.agent.train_step()
             if loss is not None:
                 self.losses.append(loss)
+
+    def _immediate_reward(self, simulator, toolgroup, selected: Lot, candidates: tuple[Lot, ...], tool) -> tuple[float, dict[str, float]]:
+        candidate_scores = [
+            self._candidate_dense_score(simulator, toolgroup, lot, candidates, tool)
+            for lot in candidates
+        ]
+        selected_score = self._candidate_dense_score(simulator, toolgroup, selected, candidates, tool)
+        best_score = max(candidate_scores) if candidate_scores else selected_score
+        mean_score = sum(candidate_scores) / len(candidate_scores) if candidate_scores else selected_score
+        relative_quality = selected_score - mean_score
+        regret = best_score - selected_score
+        urgency = self._urgency_score(simulator.now, selected)
+        setup_penalty = self._setup_penalty(simulator, toolgroup, selected, tool)
+        batch_reward, batch_penalty = self._batch_reward_penalty(simulator, toolgroup, selected, candidates)
+        cqt_reward, cqt_penalty = self._cqt_reward_penalty(simulator, selected)
+        hot_priority_bonus = 0.05 * max(0.0, selected.priority - 10.0) / 20.0
+        if selected.super_hot_lot:
+            hot_priority_bonus += 0.15
+        reward = (
+            0.35 * relative_quality
+            - 0.25 * regret
+            + 0.25 * urgency
+            + batch_reward
+            + cqt_reward
+            + hot_priority_bonus
+            - setup_penalty
+            - batch_penalty
+            - cqt_penalty
+        )
+        components = {
+            "reward": float(reward),
+            "immediate_relative_quality": float(relative_quality),
+            "immediate_regret": float(regret),
+            "immediate_urgency": float(urgency),
+            "immediate_setup_penalty": float(setup_penalty),
+            "immediate_batch_reward": float(batch_reward),
+            "immediate_batch_penalty": float(batch_penalty),
+            "immediate_cqt_reward": float(cqt_reward),
+            "immediate_cqt_penalty": float(cqt_penalty),
+            "immediate_hot_priority_bonus": float(hot_priority_bonus),
+        }
+        return float(reward), components
+
+    def _candidate_dense_score(self, simulator, toolgroup, lot: Lot, candidates: tuple[Lot, ...], tool) -> float:
+        urgency = self._urgency_score(simulator.now, lot)
+        setup_penalty = self._setup_penalty(simulator, toolgroup, lot, tool)
+        batch_reward, batch_penalty = self._batch_reward_penalty(simulator, toolgroup, lot, candidates)
+        cqt_reward, cqt_penalty = self._cqt_reward_penalty(simulator, lot)
+        priority_bonus = 0.05 * max(0.0, lot.priority - 10.0) / 20.0
+        if lot.super_hot_lot:
+            priority_bonus += 0.15
+        return urgency + batch_reward + cqt_reward + priority_bonus - setup_penalty - batch_penalty - cqt_penalty
+
+    def _urgency_score(self, now: float, lot: Lot) -> float:
+        remaining = max(lot.route.remaining_nominal_minutes(lot.step_index), 1.0)
+        if lot.due_time is None:
+            slack_score = 0.0
+            cr_score = 0.0
+        else:
+            slack_days = (lot.due_time - now - remaining) / MINUTES_PER_DAY
+            critical_ratio = (lot.due_time - now) / remaining
+            slack_score = max(-1.0, min(1.0, -slack_days / 7.0))
+            cr_score = max(0.0, min(1.0, (1.5 - critical_ratio) / 1.5))
+        wait_since = lot.waiting_since if lot.waiting_since is not None else lot.release_time
+        wait_score = max(0.0, min(1.0, (now - wait_since) / MINUTES_PER_DAY))
+        return 0.45 * slack_score + 0.35 * cr_score + 0.20 * wait_score
+
+    def _setup_penalty(self, simulator, toolgroup, lot: Lot, tool) -> float:
+        if tool is not None:
+            setup = simulator._setup_duration_preview(tool, lot.current_step)
+        elif toolgroup.idle_tools:
+            setup = min(simulator._setup_duration_preview(item, lot.current_step) for item in toolgroup.idle_tools)
+        else:
+            setup = 0.0
+        return 0.20 * max(0.0, min(1.0, setup / MINUTES_PER_DAY))
+
+    def _batch_reward_penalty(self, simulator, toolgroup, lot: Lot, candidates: tuple[Lot, ...]) -> tuple[float, float]:
+        if not simulator._is_batch_step(toolgroup, lot.current_step):
+            return 0.0, 0.0
+        minimum = lot.current_step.batch_minimum or 0.0
+        maximum = lot.current_step.batch_maximum or max(minimum, 1.0)
+        compatible = [
+            candidate for candidate in candidates
+            if simulator._batch_compatible(toolgroup, lot, candidate)
+        ]
+        quantity = simulator._batch_quantity(toolgroup, compatible)
+        fill_ratio = quantity / max(maximum, 1.0)
+        if quantity >= minimum:
+            return 0.20 * min(1.0, fill_ratio), 0.0
+        shortage = (minimum - quantity) / max(minimum, 1.0)
+        return 0.0, 0.30 * min(1.0, shortage)
+
+    def _cqt_reward_penalty(self, simulator, lot: Lot) -> tuple[float, float]:
+        remaining = self._active_cqt_remaining(simulator, lot)
+        if remaining is None:
+            return 0.0, 0.0
+        if remaining < 0:
+            return 0.0, 0.75
+        remaining_days = remaining / MINUTES_PER_DAY
+        if remaining_days <= 0.25:
+            return 0.35, 0.0
+        if remaining_days <= 1.0:
+            return 0.20, 0.0
+        return 0.05, 0.0
 
     def _reward(self, simulator, lot: Lot, decision: PendingDecision, now: float, terminal: bool) -> tuple[float, dict[str, float]]:
         remaining_after = 0.0 if terminal else lot.route.remaining_nominal_minutes(lot.step_index)
