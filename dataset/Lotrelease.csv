@@ -1,0 +1,22 @@
+﻿PRODUCT NAME,ROUTE NAME,LOT NAME/TYPE,PRIORITY,SUPERHOTLOT,WAFERS PER LOT,START DATE,RELEASE DISTRIBUTION,RELEASE INTERVAL,R UNITS,LOTS PER RELEASE,DUE DATE,Release Scenario
+Product_1,Route_Product_1,Regular_Lot_1,10,no,25,2018-01-01,constant,258.46,min,1,2018-02-19 18:41:46,1000 WSPW per Product
+Product_2,Route_Product_2,Regular_Lot_2,10,no,25,2018-01-01,constant,258.46,min,1,2018-02-22 11:05:59,90% on time (FIFO)
+Product_3,Route_Product_3,Regular_Lot_3,10,no,25,2018-01-01,constant,258.46,min,1,2018-02-26 08:27:35,
+Product_4,Route_Product_4,Regular_Lot_4,10,no,25,2018-01-01,constant,258.46,min,1,2018-02-02 04:30:02,
+Product_5,Route_Product_5,Regular_Lot_5,10,no,25,2018-01-01,constant,258.46,min,1,2018-01-24 18:49:41,
+Product_6,Route_Product_6,Regular_Lot_6,10,no,25,2018-01-01,constant,258.46,min,1,2018-01-30 23:03:00,
+Product_7,Route_Product_7,Regular_Lot_7,10,no,25,2018-01-01,constant,258.46,min,1,2018-02-05 00:53:39,
+Product_8,Route_Product_8,Regular_Lot_8,10,no,25,2018-01-01,constant,258.46,min,1,2018-02-07 22:42:05,
+Product_9,Route_Product_9,Regular_Lot_9,10,no,25,2018-01-01,constant,258.46,min,1,2018-02-09 00:24:20,
+Product_10,Route_Product_10,Regular_Lot_10,10,no,25,2018-01-01,constant,258.46,min,1,2018-02-10 02:18:05,
+Product_1,Route_Product_1,HotLot_1,20,no,25,2018-01-01,constant,10080.0,min,1,2018-02-03 22:41:51,
+Product_2,Route_Product_2,HotLot_2,20,no,25,2018-01-01,constant,10080.0,min,1,2018-02-06 05:43:47,
+Product_3,Route_Product_3,HotLot_3,20,no,25,2018-01-01,constant,10080.0,min,1,2018-02-08 07:05:01,
+Product_4,Route_Product_4,HotLot_4,20,no,25,2018-01-01,constant,10080.0,min,1,2018-01-24 01:49:09,
+Product_5,Route_Product_5,HotLot_5,20,no,25,2018-01-01,constant,10080.0,min,1,2018-01-17 20:54:20,
+Product_6,Route_Product_6,HotLot_6,20,no,25,2018-01-01,constant,10080.0,min,1,2018-01-21 22:30:42,
+Product_7,Route_Product_7,HotLot_7,20,no,25,2018-01-01,constant,10080.0,min,1,2018-01-25 00:45:18,
+Product_8,Route_Product_8,HotLot_8,20,no,25,2018-01-01,constant,10080.0,min,1,2018-01-26 09:57:25,
+Product_9,Route_Product_9,HotLot_9,20,no,25,2018-01-01,constant,10080.0,min,1,2018-01-27 18:09:27,
+Product_10,Route_Product_10,HotLot_10,20,no,25,2018-01-01,constant,10080.0,min,1,2018-01-28 18:30:14,
+Product_3,Route_Product_3,SuperHotLot,30,yes,25,2018-01-01,constant,28258.37,min,1,2018-02-08 07:05:01,

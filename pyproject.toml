@@ -1,0 +1,17 @@
+[project]
+name = "gy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ipykernel>=7.2.0",
+    "matplotlib>=3.10.9",
+    "networkx>=3.6.1",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.2",
+    "scipy>=1.17.1",
+]
+
+[project.scripts]
+smt2020-sim = "src.simulator.cli:main"

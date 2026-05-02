@@ -1,0 +1,293 @@
+﻿PM EVENT NAME,PM EVENT VALID FOR TYPE,TYPE NAME,PM TYPE,MTBeforePM,MTBPM UNITS,TTR DISTRIBUTION,MEAN,OFFSET,TTR UNITS,FIRST ONE AT DISTRIBUTION,FOA,FOA UNITS
+DefMet_BE_33_MN,toolgroup,DefMet_BE_33,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,29.1,day
+DefMet_BE_33_QT,toolgroup,DefMet_BE_33,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,88.3,day
+DefMet_BE_42_MN,toolgroup,DefMet_BE_42,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,25.8,day
+DefMet_BE_42_QT,toolgroup,DefMet_BE_42,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,78.3,day
+DefMet_FE_10_MN,toolgroup,DefMet_FE_10,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,27.0,day
+DefMet_FE_10_QT,toolgroup,DefMet_FE_10,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,81.9,day
+DefMet_FE_106_MN,toolgroup,DefMet_FE_106,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,25.5,day
+DefMet_FE_106_QT,toolgroup,DefMet_FE_106,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,77.4,day
+DefMEt_FE_118_MN,toolgroup,DefMEt_FE_118,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,28.2,day
+DefMEt_FE_118_QT,toolgroup,DefMEt_FE_118,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,85.5,day
+DefMet_FE_34_MN,toolgroup,DefMet_FE_34,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,33.0,day
+DefMet_FE_34_QT,toolgroup,DefMet_FE_34,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,100.1,day
+DefMet_FE_43_MN,toolgroup,DefMet_FE_43,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,28.8,day
+DefMet_FE_43_QT,toolgroup,DefMet_FE_43,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,87.4,day
+Diffusion_BE_123_MN,toolgroup,Diffusion_BE_123,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,28.5,day
+Diffusion_BE_123_QT,toolgroup,Diffusion_BE_123,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,86.5,day
+Diffusion_FE_100_MN,toolgroup,Diffusion_FE_100,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,29.7,day
+Diffusion_FE_100_QT,toolgroup,Diffusion_FE_100,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,90.1,day
+Diffusion_FE_101_MN,toolgroup,Diffusion_FE_101,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,31.5,day
+Diffusion_FE_101_QT,toolgroup,Diffusion_FE_101,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,95.6,day
+Diffusion_FE_120_MN,toolgroup,Diffusion_FE_120,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,27.9,day
+Diffusion_FE_120_QT,toolgroup,Diffusion_FE_120,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,84.6,day
+Diffusion_FE_122_MN,toolgroup,Diffusion_FE_122,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,27.9,day
+Diffusion_FE_122_QT,toolgroup,Diffusion_FE_122,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,84.6,day
+Diffusion_FE_125_MN,toolgroup,Diffusion_FE_125,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,28.5,day
+Diffusion_FE_125_QT,toolgroup,Diffusion_FE_125,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,86.5,day
+Diffusion_FE_126_MN,toolgroup,Diffusion_FE_126,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,30.6,day
+Diffusion_FE_126_QT,toolgroup,Diffusion_FE_126,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,92.8,day
+Diffusion_FE_127_MN,toolgroup,Diffusion_FE_127,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,31.8,day
+Diffusion_FE_127_QT,toolgroup,Diffusion_FE_127,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,96.5,day
+Diffusion_FE_44_MN,toolgroup,Diffusion_FE_44,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,30.3,day
+Diffusion_FE_44_QT,toolgroup,Diffusion_FE_44,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,91.9,day
+Diffusion_FE_94_MN,toolgroup,Diffusion_FE_94,time based (calendar),30,day,uniform,26.21,5.24,hr,constant,30.0,day
+Diffusion_FE_94_QT,toolgroup,Diffusion_FE_94,time based (calendar),91,day,uniform,52.42,10.48,hr,constant,91.0,day
+Litho_BE_110_WK,toolgroup,Litho_BE_110,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,7.0,day
+Litho_BE_110_MN,toolgroup,Litho_BE_110,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,30.0,day
+Litho_BE_110_QT,toolgroup,Litho_BE_110,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,91.0,day
+Litho_BE_93_WK,toolgroup,Litho_BE_93,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,7.1,day
+Litho_BE_93_MN,toolgroup,Litho_BE_93,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,30.3,day
+Litho_BE_93_QT,toolgroup,Litho_BE_93,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,91.9,day
+Litho_BE_99_WK,toolgroup,Litho_BE_99,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,6.6,day
+Litho_BE_99_MN,toolgroup,Litho_BE_99,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,28.2,day
+Litho_BE_99_QT,toolgroup,Litho_BE_99,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,85.5,day
+Litho_FE_111_WK,toolgroup,Litho_FE_111,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,6.7,day
+Litho_FE_111_MN,toolgroup,Litho_FE_111,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,28.8,day
+Litho_FE_111_QT,toolgroup,Litho_FE_111,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,87.4,day
+Litho_FE_35_WK,toolgroup,Litho_FE_35,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,6.4,day
+Litho_FE_35_MN,toolgroup,Litho_FE_35,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,27.3,day
+Litho_FE_35_QT,toolgroup,Litho_FE_35,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,82.8,day
+Litho_FE_92_WK,toolgroup,Litho_FE_92,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,7.2,day
+Litho_FE_92_MN,toolgroup,Litho_FE_92,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,30.9,day
+Litho_FE_92_QT,toolgroup,Litho_FE_92,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,93.7,day
+Litho_FE_98_WK,toolgroup,Litho_FE_98,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,7.7,day
+Litho_FE_98_MN,toolgroup,Litho_FE_98,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,33.0,day
+Litho_FE_98_QT,toolgroup,Litho_FE_98,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,100.1,day
+Litho_REG_BE_63_MN,toolgroup,Litho_REG_BE_63,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,29.1,day
+Litho_REG_BE_63_QT,toolgroup,Litho_REG_BE_63,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,88.3,day
+Litho_REG_FE_64_MN,toolgroup,Litho_REG_FE_64,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,29.7,day
+Litho_REG_FE_64_QT,toolgroup,Litho_REG_FE_64,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,90.1,day
+LithoMet_BE_18_MN,toolgroup,LithoMet_BE_18,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,31.8,day
+LithoMet_BE_18_QT,toolgroup,LithoMet_BE_18,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,96.5,day
+LithoMet_FE_19_MN,toolgroup,LithoMet_FE_19,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,31.2,day
+LithoMet_FE_19_QT,toolgroup,LithoMet_FE_19,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,94.6,day
+LithoTrack_BE_117_WK,toolgroup,LithoTrack_BE_117,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,7.5,day
+LithoTrack_BE_117_MN,toolgroup,LithoTrack_BE_117,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,32.1,day
+LithoTrack_BE_117_QT,toolgroup,LithoTrack_BE_117,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,97.4,day
+LithoTrack_FE_115_WK,toolgroup,LithoTrack_FE_115,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,7.0,day
+LithoTrack_FE_115_MN,toolgroup,LithoTrack_FE_115,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,30.0,day
+LithoTrack_FE_115_QT,toolgroup,LithoTrack_FE_115,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,91.0,day
+LithoTrack_FE_95_WK,toolgroup,LithoTrack_FE_95,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,6.9,day
+LithoTrack_FE_95_MN,toolgroup,LithoTrack_FE_95,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,29.7,day
+LithoTrack_FE_95_QT,toolgroup,LithoTrack_FE_95,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,90.1,day
+LithoTrack_FE_96_WK,toolgroup,LithoTrack_FE_96,time based (calendar),7,day,uniform,6.65,1.33,hr,constant,6.4,day
+LithoTrack_FE_96_MN,toolgroup,LithoTrack_FE_96,time based (calendar),30,day,uniform,13.29,2.66,hr,constant,27.6,day
+LithoTrack_FE_96_QT,toolgroup,LithoTrack_FE_96,time based (calendar),91,day,uniform,26.59,5.32,hr,constant,83.7,day
+TF_Met_FE_45_MN,toolgroup,TF_Met_FE_45,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,32.7,day
+TF_Met_FE_45_QT,toolgroup,TF_Met_FE_45,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,99.2,day
+TF_Met_FE_61_MN,toolgroup,TF_Met_FE_61,time based (calendar),30,day,uniform,13.76,2.75,hr,constant,30.9,day
+TF_Met_FE_61_QT,toolgroup,TF_Met_FE_61,time based (calendar),91,day,uniform,27.52,5.5,hr,constant,93.7,day
+DE_BE_11_WK,toolgroup,DE_BE_11,counter based,2222,Wafer,uniform,8.74,1.75,hr,constant,2244.0,Wafer
+DE_BE_11_MN,toolgroup,DE_BE_11,counter based,9667,Wafer,uniform,17.47,3.49,hr,constant,9764.0,Wafer
+DE_BE_11_QT,toolgroup,DE_BE_11,counter based,29000,Wafer,uniform,34.94,6.99,hr,constant,29290.0,Wafer
+DE_BE_12_WK,toolgroup,DE_BE_12,counter based,1143,Wafer,uniform,8.74,1.75,hr,constant,1200.0,Wafer
+DE_BE_12_MN,toolgroup,DE_BE_12,counter based,5000,Wafer,uniform,17.47,3.49,hr,constant,5250.0,Wafer
+DE_BE_12_QT,toolgroup,DE_BE_12,counter based,15000,Wafer,uniform,34.94,6.99,hr,constant,15750.0,Wafer
+DE_BE_13_WK,toolgroup,DE_BE_13,counter based,1923,Wafer,uniform,8.74,1.75,hr,constant,1942.0,Wafer
+DE_BE_13_MN,toolgroup,DE_BE_13,counter based,8308,Wafer,uniform,17.47,3.49,hr,constant,8391.0,Wafer
+DE_BE_13_QT,toolgroup,DE_BE_13,counter based,24923,Wafer,uniform,34.94,6.99,hr,constant,25172.0,Wafer
+DE_BE_48_WK,toolgroup,DE_BE_48,counter based,1455,Wafer,uniform,8.74,1.75,hr,constant,1542.0,Wafer
+DE_BE_48_MN,toolgroup,DE_BE_48,counter based,6273,Wafer,uniform,17.47,3.49,hr,constant,6649.0,Wafer
+DE_BE_48_QT,toolgroup,DE_BE_48,counter based,18818,Wafer,uniform,34.94,6.99,hr,constant,19947.0,Wafer
+DE_BE_50_WK,toolgroup,DE_BE_50,counter based,1800,Wafer,uniform,8.74,1.75,hr,constant,1800.0,Wafer
+DE_BE_50_MN,toolgroup,DE_BE_50,counter based,7800,Wafer,uniform,17.47,3.49,hr,constant,7800.0,Wafer
+DE_BE_50_QT,toolgroup,DE_BE_50,counter based,23400,Wafer,uniform,34.94,6.99,hr,constant,23400.0,Wafer
+DE_BE_65_WK,toolgroup,DE_BE_65,counter based,1727,Wafer,uniform,8.74,1.75,hr,constant,1710.0,Wafer
+DE_BE_65_MN,toolgroup,DE_BE_65,counter based,7455,Wafer,uniform,17.47,3.49,hr,constant,7380.0,Wafer
+DE_BE_65_QT,toolgroup,DE_BE_65,counter based,22364,Wafer,uniform,34.94,6.99,hr,constant,22140.0,Wafer
+DE_BE_66_WK,toolgroup,DE_BE_66,counter based,1471,Wafer,uniform,8.74,1.75,hr,constant,1486.0,Wafer
+DE_BE_66_MN,toolgroup,DE_BE_66,counter based,6353,Wafer,uniform,17.47,3.49,hr,constant,6417.0,Wafer
+DE_BE_66_QT,toolgroup,DE_BE_66,counter based,19059,Wafer,uniform,34.94,6.99,hr,constant,19250.0,Wafer
+DE_BE_67_WK,toolgroup,DE_BE_67,counter based,1818,Wafer,uniform,8.74,1.75,hr,constant,1782.0,Wafer
+DE_BE_67_MN,toolgroup,DE_BE_67,counter based,7909,Wafer,uniform,17.47,3.49,hr,constant,7751.0,Wafer
+DE_BE_67_QT,toolgroup,DE_BE_67,counter based,23727,Wafer,uniform,34.94,6.99,hr,constant,23252.0,Wafer
+DE_BE_69_WK,toolgroup,DE_BE_69,counter based,2000,Wafer,uniform,8.74,1.75,hr,constant,2180.0,Wafer
+DE_BE_69_MN,toolgroup,DE_BE_69,counter based,8667,Wafer,uniform,17.47,3.49,hr,constant,9447.0,Wafer
+DE_BE_69_QT,toolgroup,DE_BE_69,counter based,26000,Wafer,uniform,34.94,6.99,hr,constant,28340.0,Wafer
+DE_FE_1_WK,toolgroup,DE_FE_1,counter based,1400,Wafer,uniform,8.74,1.75,hr,constant,1302.0,Wafer
+DE_FE_1_MN,toolgroup,DE_FE_1,counter based,6000,Wafer,uniform,17.47,3.49,hr,constant,5580.0,Wafer
+DE_FE_1_QT,toolgroup,DE_FE_1,counter based,18000,Wafer,uniform,34.94,6.99,hr,constant,16740.0,Wafer
+DE_FE_51_WK,toolgroup,DE_FE_51,counter based,1550,Wafer,uniform,8.74,1.75,hr,constant,1504.0,Wafer
+DE_FE_51_MN,toolgroup,DE_FE_51,counter based,6700,Wafer,uniform,17.47,3.49,hr,constant,6499.0,Wafer
+DE_FE_51_QT,toolgroup,DE_FE_51,counter based,20100,Wafer,uniform,34.94,6.99,hr,constant,19497.0,Wafer
+DE_FE_53_WK,toolgroup,DE_FE_53,counter based,1000,Wafer,uniform,8.74,1.75,hr,constant,900.0,Wafer
+DE_FE_53_MN,toolgroup,DE_FE_53,counter based,4400,Wafer,uniform,17.47,3.49,hr,constant,3960.0,Wafer
+DE_FE_53_QT,toolgroup,DE_FE_53,counter based,13200,Wafer,uniform,34.94,6.99,hr,constant,11880.0,Wafer
+DE_FE_54_WK,toolgroup,DE_FE_54,counter based,1667,Wafer,uniform,8.74,1.75,hr,constant,1650.0,Wafer
+DE_FE_54_MN,toolgroup,DE_FE_54,counter based,7333,Wafer,uniform,17.47,3.49,hr,constant,7260.0,Wafer
+DE_FE_54_QT,toolgroup,DE_FE_54,counter based,22000,Wafer,uniform,34.94,6.99,hr,constant,21780.0,Wafer
+DE_FE_56_WK,toolgroup,DE_FE_56,counter based,2500,Wafer,uniform,8.74,1.75,hr,constant,2825.0,Wafer
+DE_FE_56_MN,toolgroup,DE_FE_56,counter based,11000,Wafer,uniform,17.47,3.49,hr,constant,12430.0,Wafer
+DE_FE_56_QT,toolgroup,DE_FE_56,counter based,33000,Wafer,uniform,34.94,6.99,hr,constant,37290.0,Wafer
+DE_FE_58_WK,toolgroup,DE_FE_58,counter based,2000,Wafer,uniform,8.74,1.75,hr,constant,2240.0,Wafer
+DE_FE_58_MN,toolgroup,DE_FE_58,counter based,8500,Wafer,uniform,17.47,3.49,hr,constant,9520.0,Wafer
+DE_FE_58_QT,toolgroup,DE_FE_58,counter based,25500,Wafer,uniform,34.94,6.99,hr,constant,28560.0,Wafer
+DE_FE_59_WK,toolgroup,DE_FE_59,counter based,1750,Wafer,uniform,8.74,1.75,hr,constant,1750.0,Wafer
+DE_FE_59_MN,toolgroup,DE_FE_59,counter based,7625,Wafer,uniform,17.47,3.49,hr,constant,7625.0,Wafer
+DE_FE_59_QT,toolgroup,DE_FE_59,counter based,22875,Wafer,uniform,34.94,6.99,hr,constant,22875.0,Wafer
+DE_FE_62_WK,toolgroup,DE_FE_62,counter based,1471,Wafer,uniform,8.74,1.75,hr,constant,1427.0,Wafer
+DE_FE_62_MN,toolgroup,DE_FE_62,counter based,6353,Wafer,uniform,17.47,3.49,hr,constant,6162.0,Wafer
+DE_FE_62_QT,toolgroup,DE_FE_62,counter based,19059,Wafer,uniform,34.94,6.99,hr,constant,18487.0,Wafer
+DE_FE_70_WK,toolgroup,DE_FE_70,counter based,2091,Wafer,uniform,8.74,1.75,hr,constant,2028.0,Wafer
+DE_FE_70_MN,toolgroup,DE_FE_70,counter based,9091,Wafer,uniform,17.47,3.49,hr,constant,8818.0,Wafer
+DE_FE_70_QT,toolgroup,DE_FE_70,counter based,27273,Wafer,uniform,34.94,6.99,hr,constant,26455.0,Wafer
+DE_FE_71_WK,toolgroup,DE_FE_71,counter based,1500,Wafer,uniform,8.74,1.75,hr,constant,1485.0,Wafer
+DE_FE_71_MN,toolgroup,DE_FE_71,counter based,6500,Wafer,uniform,17.47,3.49,hr,constant,6435.0,Wafer
+DE_FE_71_QT,toolgroup,DE_FE_71,counter based,19500,Wafer,uniform,34.94,6.99,hr,constant,19305.0,Wafer
+DE_FE_72_WK,toolgroup,DE_FE_72,counter based,1909,Wafer,uniform,8.74,1.75,hr,constant,1814.0,Wafer
+DE_FE_72_MN,toolgroup,DE_FE_72,counter based,8273,Wafer,uniform,17.47,3.49,hr,constant,7859.0,Wafer
+DE_FE_72_QT,toolgroup,DE_FE_72,counter based,24818,Wafer,uniform,34.94,6.99,hr,constant,23577.0,Wafer
+DE_FE_86_WK,toolgroup,DE_FE_86,counter based,1542,Wafer,uniform,8.74,1.75,hr,constant,1556.0,Wafer
+DE_FE_86_MN,toolgroup,DE_FE_86,counter based,6686,Wafer,uniform,17.47,3.49,hr,constant,6744.0,Wafer
+DE_FE_86_QT,toolgroup,DE_FE_86,counter based,20059,Wafer,uniform,34.94,6.99,hr,constant,20231.0,Wafer
+Dielectric_BE_20_WK,toolgroup,Dielectric_BE_20,counter based,3400,Wafer,uniform,13.29,2.66,hr,constant,3604.0,Wafer
+Dielectric_BE_20_MN,toolgroup,Dielectric_BE_20,counter based,14800,Wafer,uniform,26.59,5.32,hr,constant,15688.0,Wafer
+Dielectric_BE_20_QT,toolgroup,Dielectric_BE_20,counter based,44400,Wafer,uniform,53.18,10.64,hr,constant,47064.0,Wafer
+Dielectric_BE_21_WK,toolgroup,Dielectric_BE_21,counter based,4333,Wafer,uniform,13.29,2.66,hr,constant,4680.0,Wafer
+Dielectric_BE_21_MN,toolgroup,Dielectric_BE_21,counter based,18833,Wafer,uniform,26.59,5.32,hr,constant,20340.0,Wafer
+Dielectric_BE_21_QT,toolgroup,Dielectric_BE_21,counter based,56500,Wafer,uniform,53.18,10.64,hr,constant,61020.0,Wafer
+Dielectric_BE_27_WK,toolgroup,Dielectric_BE_27,counter based,3833,Wafer,uniform,13.29,2.66,hr,constant,3986.0,Wafer
+Dielectric_BE_27_MN,toolgroup,Dielectric_BE_27,counter based,16583,Wafer,uniform,26.59,5.32,hr,constant,17246.0,Wafer
+Dielectric_BE_27_QT,toolgroup,Dielectric_BE_27,counter based,49750,Wafer,uniform,53.18,10.64,hr,constant,51740.0,Wafer
+Dielectric_BE_28_WK,toolgroup,Dielectric_BE_28,counter based,4333,Wafer,uniform,13.29,2.66,hr,constant,4420.0,Wafer
+Dielectric_BE_28_MN,toolgroup,Dielectric_BE_28,counter based,18667,Wafer,uniform,26.59,5.32,hr,constant,19040.0,Wafer
+Dielectric_BE_28_QT,toolgroup,Dielectric_BE_28,counter based,56000,Wafer,uniform,53.18,10.64,hr,constant,57120.0,Wafer
+Dielectric_BE_60_WK,toolgroup,Dielectric_BE_60,counter based,4167,Wafer,uniform,13.29,2.66,hr,constant,4000.0,Wafer
+Dielectric_BE_60_MN,toolgroup,Dielectric_BE_60,counter based,18000,Wafer,uniform,26.59,5.32,hr,constant,17280.0,Wafer
+Dielectric_BE_60_QT,toolgroup,Dielectric_BE_60,counter based,54000,Wafer,uniform,53.18,10.64,hr,constant,51840.0,Wafer
+Dielectric_FE_112_WK,toolgroup,Dielectric_FE_112,counter based,3444,Wafer,uniform,13.29,2.66,hr,constant,3547.0,Wafer
+Dielectric_FE_112_MN,toolgroup,Dielectric_FE_112,counter based,14889,Wafer,uniform,26.59,5.32,hr,constant,15336.0,Wafer
+Dielectric_FE_112_QT,toolgroup,Dielectric_FE_112,counter based,44667,Wafer,uniform,53.18,10.64,hr,constant,46007.0,Wafer
+Dielectric_FE_130_WK,toolgroup,Dielectric_FE_130,counter based,3500,Wafer,uniform,13.29,2.66,hr,constant,3500.0,Wafer
+Dielectric_FE_130_MN,toolgroup,Dielectric_FE_130,counter based,15250,Wafer,uniform,26.59,5.32,hr,constant,15250.0,Wafer
+Dielectric_FE_130_QT,toolgroup,Dielectric_FE_130,counter based,45750,Wafer,uniform,53.18,10.64,hr,constant,45750.0,Wafer
+Dielectric_FE_29_WK,toolgroup,Dielectric_FE_29,counter based,3000,Wafer,uniform,13.29,2.66,hr,constant,2730.0,Wafer
+Dielectric_FE_29_MN,toolgroup,Dielectric_FE_29,counter based,13000,Wafer,uniform,26.59,5.32,hr,constant,11830.0,Wafer
+Dielectric_FE_29_QT,toolgroup,Dielectric_FE_29,counter based,39000,Wafer,uniform,53.18,10.64,hr,constant,35490.0,Wafer
+Dielectric_FE_30_WK,toolgroup,Dielectric_FE_30,counter based,3500,Wafer,uniform,13.29,2.66,hr,constant,3150.0,Wafer
+Dielectric_FE_30_MN,toolgroup,Dielectric_FE_30,counter based,15000,Wafer,uniform,26.59,5.32,hr,constant,13500.0,Wafer
+Dielectric_FE_30_QT,toolgroup,Dielectric_FE_30,counter based,45000,Wafer,uniform,53.18,10.64,hr,constant,40500.0,Wafer
+Dielectric_FE_31_WK,toolgroup,Dielectric_FE_31,counter based,4000,Wafer,uniform,13.29,2.66,hr,constant,4360.0,Wafer
+Dielectric_FE_31_MN,toolgroup,Dielectric_FE_31,counter based,17250,Wafer,uniform,26.59,5.32,hr,constant,18803.0,Wafer
+Dielectric_FE_31_QT,toolgroup,Dielectric_FE_31,counter based,51750,Wafer,uniform,53.18,10.64,hr,constant,56408.0,Wafer
+EPI_36_WK,toolgroup,EPI_36,counter based,2500,Wafer,uniform,13.29,2.66,hr,constant,2675.0,Wafer
+EPI_36_MN,toolgroup,EPI_36,counter based,11000,Wafer,uniform,26.59,5.32,hr,constant,11770.0,Wafer
+EPI_36_QT,toolgroup,EPI_36,counter based,33000,Wafer,uniform,53.18,10.64,hr,constant,35310.0,Wafer
+EPI_38_WK,toolgroup,EPI_38,counter based,4000,Wafer,uniform,13.29,2.66,hr,constant,3480.0,Wafer
+EPI_38_MN,toolgroup,EPI_38,counter based,17000,Wafer,uniform,26.59,5.32,hr,constant,14790.0,Wafer
+EPI_38_QT,toolgroup,EPI_38,counter based,51000,Wafer,uniform,53.18,10.64,hr,constant,44370.0,Wafer
+Implant_119_WK,toolgroup,Implant_119,counter based,5500,Wafer,uniform,13.29,2.66,hr,constant,4895.0,Wafer
+Implant_119_MN,toolgroup,Implant_119,counter based,24000,Wafer,uniform,26.59,5.32,hr,constant,21360.0,Wafer
+Implant_119_QT,toolgroup,Implant_119,counter based,72000,Wafer,uniform,53.18,10.64,hr,constant,64080.0,Wafer
+Implant_128_WK,toolgroup,Implant_128,counter based,7364,Wafer,uniform,13.29,2.66,hr,constant,7438.0,Wafer
+Implant_128_MN,toolgroup,Implant_128,counter based,31909,Wafer,uniform,26.59,5.32,hr,constant,32228.0,Wafer
+Implant_128_QT,toolgroup,Implant_128,counter based,95727,Wafer,uniform,53.18,10.64,hr,constant,96684.0,Wafer
+Implant_132_WK,toolgroup,Implant_132,counter based,6143,Wafer,uniform,13.29,2.66,hr,constant,6143.0,Wafer
+Implant_132_MN,toolgroup,Implant_132,counter based,26571,Wafer,uniform,26.59,5.32,hr,constant,26571.0,Wafer
+Implant_132_QT,toolgroup,Implant_132,counter based,79714,Wafer,uniform,53.18,10.64,hr,constant,79714.0,Wafer
+Implant_74_WK,toolgroup,Implant_74,counter based,3500,Wafer,uniform,13.29,2.66,hr,constant,3465.0,Wafer
+Implant_74_MN,toolgroup,Implant_74,counter based,15000,Wafer,uniform,26.59,5.32,hr,constant,14850.0,Wafer
+Implant_74_QT,toolgroup,Implant_74,counter based,45000,Wafer,uniform,53.18,10.64,hr,constant,44550.0,Wafer
+Implant_88_WK,toolgroup,Implant_88,counter based,3500,Wafer,uniform,13.29,2.66,hr,constant,3570.0,Wafer
+Implant_88_MN,toolgroup,Implant_88,counter based,15000,Wafer,uniform,26.59,5.32,hr,constant,15300.0,Wafer
+Implant_88_QT,toolgroup,Implant_88,counter based,45000,Wafer,uniform,53.18,10.64,hr,constant,45900.0,Wafer
+Implant_90_WK,toolgroup,Implant_90,counter based,5500,Wafer,uniform,13.29,2.66,hr,constant,5610.0,Wafer
+Implant_90_MN,toolgroup,Implant_90,counter based,24000,Wafer,uniform,26.59,5.32,hr,constant,24480.0,Wafer
+Implant_90_QT,toolgroup,Implant_90,counter based,72000,Wafer,uniform,53.18,10.64,hr,constant,73440.0,Wafer
+Implant_91_WK,toolgroup,Implant_91,counter based,6429,Wafer,uniform,13.29,2.66,hr,constant,6879.0,Wafer
+Implant_91_MN,toolgroup,Implant_91,counter based,27857,Wafer,uniform,26.59,5.32,hr,constant,29807.0,Wafer
+Implant_91_QT,toolgroup,Implant_91,counter based,83571,Wafer,uniform,53.18,10.64,hr,constant,89421.0,Wafer
+Planar_BE_75_WK,toolgroup,Planar_BE_75,counter based,3357,Wafer,uniform,17.09,3.42,hr,constant,3189.0,Wafer
+Planar_BE_75_MN,toolgroup,Planar_BE_75,counter based,14571,Wafer,uniform,34.18,6.84,hr,constant,13842.0,Wafer
+Planar_BE_75_QT,toolgroup,Planar_BE_75,counter based,43714,Wafer,uniform,68.37,13.67,hr,constant,41528.0,Wafer
+Planar_FE_76_WK,toolgroup,Planar_FE_76,counter based,3500,Wafer,uniform,17.09,3.42,hr,constant,3815.0,Wafer
+Planar_FE_76_MN,toolgroup,Planar_FE_76,counter based,15000,Wafer,uniform,34.18,6.84,hr,constant,16350.0,Wafer
+Planar_FE_76_QT,toolgroup,Planar_FE_76,counter based,45000,Wafer,uniform,68.37,13.67,hr,constant,49050.0,Wafer
+Planar_FE_77_WK,toolgroup,Planar_FE_77,counter based,3500,Wafer,uniform,17.09,3.42,hr,constant,3955.0,Wafer
+Planar_FE_77_MN,toolgroup,Planar_FE_77,counter based,15000,Wafer,uniform,34.18,6.84,hr,constant,16950.0,Wafer
+Planar_FE_77_QT,toolgroup,Planar_FE_77,counter based,45000,Wafer,uniform,68.37,13.67,hr,constant,50850.0,Wafer
+Planar_FE_78_WK,toolgroup,Planar_FE_78,counter based,2500,Wafer,uniform,17.09,3.42,hr,constant,2275.0,Wafer
+Planar_FE_78_MN,toolgroup,Planar_FE_78,counter based,11000,Wafer,uniform,34.18,6.84,hr,constant,10010.0,Wafer
+Planar_FE_78_QT,toolgroup,Planar_FE_78,counter based,33000,Wafer,uniform,68.37,13.67,hr,constant,30030.0,Wafer
+Planar_FE_79_WK,toolgroup,Planar_FE_79,counter based,3000,Wafer,uniform,17.09,3.42,hr,constant,3300.0,Wafer
+Planar_FE_79_MN,toolgroup,Planar_FE_79,counter based,13000,Wafer,uniform,34.18,6.84,hr,constant,14300.0,Wafer
+Planar_FE_79_QT,toolgroup,Planar_FE_79,counter based,39000,Wafer,uniform,68.37,13.67,hr,constant,42900.0,Wafer
+Planar_FE_80_WK,toolgroup,Planar_FE_80,counter based,3500,Wafer,uniform,17.09,3.42,hr,constant,3395.0,Wafer
+Planar_FE_80_MN,toolgroup,Planar_FE_80,counter based,15000,Wafer,uniform,34.18,6.84,hr,constant,14550.0,Wafer
+Planar_FE_80_QT,toolgroup,Planar_FE_80,counter based,45000,Wafer,uniform,68.37,13.67,hr,constant,43650.0,Wafer
+TF_BE_2_WK,toolgroup,TF_BE_2,counter based,2500,Wafer,uniform,9.97,1.99,hr,constant,2325.0,Wafer
+TF_BE_2_MN,toolgroup,TF_BE_2,counter based,10750,Wafer,uniform,19.94,3.99,hr,constant,9998.0,Wafer
+TF_BE_2_QT,toolgroup,TF_BE_2,counter based,32250,Wafer,uniform,39.88,7.98,hr,constant,29993.0,Wafer
+TF_BE_23_WK,toolgroup,TF_BE_23,counter based,2786,Wafer,uniform,9.97,1.99,hr,constant,2786.0,Wafer
+TF_BE_23_MN,toolgroup,TF_BE_23,counter based,12071,Wafer,uniform,19.94,3.99,hr,constant,12071.0,Wafer
+TF_BE_23_QT,toolgroup,TF_BE_23,counter based,36214,Wafer,uniform,39.88,7.98,hr,constant,36214.0,Wafer
+TF_BE_24_WK,toolgroup,TF_BE_24,counter based,2000,Wafer,uniform,9.97,1.99,hr,constant,2160.0,Wafer
+TF_BE_24_MN,toolgroup,TF_BE_24,counter based,8750,Wafer,uniform,19.94,3.99,hr,constant,9450.0,Wafer
+TF_BE_24_QT,toolgroup,TF_BE_24,counter based,26250,Wafer,uniform,39.88,7.98,hr,constant,28350.0,Wafer
+TF_BE_26_WK,toolgroup,TF_BE_26,counter based,2923,Wafer,uniform,9.97,1.99,hr,constant,2777.0,Wafer
+TF_BE_26_MN,toolgroup,TF_BE_26,counter based,12692,Wafer,uniform,19.94,3.99,hr,constant,12057.0,Wafer
+TF_BE_26_QT,toolgroup,TF_BE_26,counter based,38077,Wafer,uniform,39.88,7.98,hr,constant,36173.0,Wafer
+TF_BE_40_WK,toolgroup,TF_BE_40,counter based,2765,Wafer,uniform,9.97,1.99,hr,constant,2682.0,Wafer
+TF_BE_40_MN,toolgroup,TF_BE_40,counter based,12000,Wafer,uniform,19.94,3.99,hr,constant,11640.0,Wafer
+TF_BE_40_QT,toolgroup,TF_BE_40,counter based,36000,Wafer,uniform,39.88,7.98,hr,constant,34920.0,Wafer
+TF_FE_103_WK,toolgroup,TF_FE_103,counter based,2286,Wafer,uniform,9.97,1.99,hr,constant,2240.0,Wafer
+TF_FE_103_MN,toolgroup,TF_FE_103,counter based,9857,Wafer,uniform,19.94,3.99,hr,constant,9660.0,Wafer
+TF_FE_103_QT,toolgroup,TF_FE_103,counter based,29571,Wafer,uniform,39.88,7.98,hr,constant,28980.0,Wafer
+TF_FE_104_WK,toolgroup,TF_FE_104,counter based,2800,Wafer,uniform,9.97,1.99,hr,constant,2968.0,Wafer
+TF_FE_104_MN,toolgroup,TF_FE_104,counter based,12200,Wafer,uniform,19.94,3.99,hr,constant,12932.0,Wafer
+TF_FE_104_QT,toolgroup,TF_FE_104,counter based,36600,Wafer,uniform,39.88,7.98,hr,constant,38796.0,Wafer
+TF_FE_113_WK,toolgroup,TF_FE_113,counter based,2333,Wafer,uniform,9.97,1.99,hr,constant,2100.0,Wafer
+TF_FE_113_MN,toolgroup,TF_FE_113,counter based,10000,Wafer,uniform,19.94,3.99,hr,constant,9000.0,Wafer
+TF_FE_113_QT,toolgroup,TF_FE_113,counter based,30000,Wafer,uniform,39.88,7.98,hr,constant,27000.0,Wafer
+TF_FE_131_WK,toolgroup,TF_FE_131,counter based,2333,Wafer,uniform,9.97,1.99,hr,constant,2356.0,Wafer
+TF_FE_131_MN,toolgroup,TF_FE_131,counter based,10167,Wafer,uniform,19.94,3.99,hr,constant,10269.0,Wafer
+TF_FE_131_QT,toolgroup,TF_FE_131,counter based,30500,Wafer,uniform,39.88,7.98,hr,constant,30805.0,Wafer
+TF_FE_3_WK,toolgroup,TF_FE_3,counter based,2333,Wafer,uniform,9.97,1.99,hr,constant,2403.0,Wafer
+TF_FE_3_MN,toolgroup,TF_FE_3,counter based,10000,Wafer,uniform,19.94,3.99,hr,constant,10300.0,Wafer
+TF_FE_3_QT,toolgroup,TF_FE_3,counter based,30000,Wafer,uniform,39.88,7.98,hr,constant,30900.0,Wafer
+TF_FE_5_WK,toolgroup,TF_FE_5,counter based,2333,Wafer,uniform,9.97,1.99,hr,constant,2100.0,Wafer
+TF_FE_5_MN,toolgroup,TF_FE_5,counter based,10000,Wafer,uniform,19.94,3.99,hr,constant,9000.0,Wafer
+TF_FE_5_QT,toolgroup,TF_FE_5,counter based,30000,Wafer,uniform,39.88,7.98,hr,constant,27000.0,Wafer
+WE_BE_14_WK,toolgroup,WE_BE_14,counter based,10800,Wafer,uniform,8.36,1.67,hr,constant,9828.0,Wafer
+WE_BE_14_MN,toolgroup,WE_BE_14,counter based,46800,Wafer,uniform,16.71,3.34,hr,constant,42588.0,Wafer
+WE_BE_14_QT,toolgroup,WE_BE_14,counter based,140400,Wafer,uniform,33.42,6.68,hr,constant,127764.0,Wafer
+WE_BE_16_WK,toolgroup,WE_BE_16,counter based,9625,Wafer,uniform,8.36,1.67,hr,constant,10010.0,Wafer
+WE_BE_16_MN,toolgroup,WE_BE_16,counter based,41750,Wafer,uniform,16.71,3.34,hr,constant,43420.0,Wafer
+WE_BE_16_QT,toolgroup,WE_BE_16,counter based,125250,Wafer,uniform,33.42,6.68,hr,constant,130260.0,Wafer
+WE_BE_17_WK,toolgroup,WE_BE_17,counter based,10000,Wafer,uniform,8.36,1.67,hr,constant,10200.0,Wafer
+WE_BE_17_MN,toolgroup,WE_BE_17,counter based,43500,Wafer,uniform,16.71,3.34,hr,constant,44370.0,Wafer
+WE_BE_17_QT,toolgroup,WE_BE_17,counter based,130500,Wafer,uniform,33.42,6.68,hr,constant,133110.0,Wafer
+WE_BE_7_WK,toolgroup,WE_BE_7,counter based,6000,Wafer,uniform,8.36,1.67,hr,constant,6840.0,Wafer
+WE_BE_7_MN,toolgroup,WE_BE_7,counter based,26000,Wafer,uniform,16.71,3.34,hr,constant,29640.0,Wafer
+WE_BE_7_QT,toolgroup,WE_BE_7,counter based,78000,Wafer,uniform,33.42,6.68,hr,constant,88920.0,Wafer
+WE_BE_81_WK,toolgroup,WE_BE_81,counter based,9000,Wafer,uniform,8.36,1.67,hr,constant,9630.0,Wafer
+WE_BE_81_MN,toolgroup,WE_BE_81,counter based,39000,Wafer,uniform,16.71,3.34,hr,constant,41730.0,Wafer
+WE_BE_81_QT,toolgroup,WE_BE_81,counter based,117000,Wafer,uniform,33.42,6.68,hr,constant,125190.0,Wafer
+WE_BE_82_WK,toolgroup,WE_BE_82,counter based,11667,Wafer,uniform,8.36,1.67,hr,constant,11550.0,Wafer
+WE_BE_82_MN,toolgroup,WE_BE_82,counter based,50556,Wafer,uniform,16.71,3.34,hr,constant,50050.0,Wafer
+WE_BE_82_QT,toolgroup,WE_BE_82,counter based,151667,Wafer,uniform,33.42,6.68,hr,constant,150150.0,Wafer
+WE_BE_9_WK,toolgroup,WE_BE_9,counter based,10000,Wafer,uniform,8.36,1.67,hr,constant,9100.0,Wafer
+WE_BE_9_MN,toolgroup,WE_BE_9,counter based,43400,Wafer,uniform,16.71,3.34,hr,constant,39494.0,Wafer
+WE_BE_9_QT,toolgroup,WE_BE_9,counter based,130200,Wafer,uniform,33.42,6.68,hr,constant,118482.0,Wafer
+WE_FE_108_WK,toolgroup,WE_FE_108,counter based,11276,Wafer,uniform,8.36,1.67,hr,constant,11163.0,Wafer
+WE_FE_108_MN,toolgroup,WE_FE_108,counter based,48862,Wafer,uniform,16.71,3.34,hr,constant,48373.0,Wafer
+WE_FE_108_QT,toolgroup,WE_FE_108,counter based,146586,Wafer,uniform,33.42,6.68,hr,constant,145120.0,Wafer
+WE_FE_41_WK,toolgroup,WE_FE_41,counter based,12000,Wafer,uniform,8.36,1.67,hr,constant,11880.0,Wafer
+WE_FE_41_MN,toolgroup,WE_FE_41,counter based,52000,Wafer,uniform,16.71,3.34,hr,constant,51480.0,Wafer
+WE_FE_41_QT,toolgroup,WE_FE_41,counter based,156000,Wafer,uniform,33.42,6.68,hr,constant,154440.0,Wafer
+WE_FE_47_WK,toolgroup,WE_FE_47,counter based,10400,Wafer,uniform,8.36,1.67,hr,constant,10400.0,Wafer
+WE_FE_47_MN,toolgroup,WE_FE_47,counter based,45000,Wafer,uniform,16.71,3.34,hr,constant,45000.0,Wafer
+WE_FE_47_QT,toolgroup,WE_FE_47,counter based,135000,Wafer,uniform,33.42,6.68,hr,constant,135000.0,Wafer
+WE_FE_8_WK,toolgroup,WE_FE_8,counter based,6000,Wafer,uniform,8.36,1.67,hr,constant,5280.0,Wafer
+WE_FE_8_MN,toolgroup,WE_FE_8,counter based,26000,Wafer,uniform,16.71,3.34,hr,constant,22880.0,Wafer
+WE_FE_8_QT,toolgroup,WE_FE_8,counter based,78000,Wafer,uniform,33.42,6.68,hr,constant,68640.0,Wafer
+WE_FE_83_WK,toolgroup,WE_FE_83,counter based,10833,Wafer,uniform,8.36,1.67,hr,constant,11158.0,Wafer
+WE_FE_83_MN,toolgroup,WE_FE_83,counter based,47000,Wafer,uniform,16.71,3.34,hr,constant,48410.0,Wafer
+WE_FE_83_QT,toolgroup,WE_FE_83,counter based,141000,Wafer,uniform,33.42,6.68,hr,constant,145230.0,Wafer
+WE_FE_84_WK,toolgroup,WE_FE_84,counter based,10824,Wafer,uniform,8.36,1.67,hr,constant,10608.0,Wafer
+WE_FE_84_MN,toolgroup,WE_FE_84,counter based,46882,Wafer,uniform,16.71,3.34,hr,constant,45944.0,Wafer
+WE_FE_84_QT,toolgroup,WE_FE_84,counter based,140647,Wafer,uniform,33.42,6.68,hr,constant,137834.0,Wafer
+WE_FE_85_WK,toolgroup,WE_FE_85,counter based,7000,Wafer,uniform,8.36,1.67,hr,constant,7560.0,Wafer
+WE_FE_85_MN,toolgroup,WE_FE_85,counter based,30500,Wafer,uniform,16.71,3.34,hr,constant,32940.0,Wafer
+WE_FE_85_QT,toolgroup,WE_FE_85,counter based,91500,Wafer,uniform,33.42,6.68,hr,constant,98820.0,Wafer

@@ -1,0 +1,14 @@
+﻿SETUP GROUP NAME,CURRENT SETUP,NEW SETUP,SETUP TIME,ST UNITS,MINMAL NUMBER OF RUNS
+,DE_BE_13_1,DE_BE_13_2,7,min,
+,DE_BE_13_2,DE_BE_13_1,12,min,
+,DE_BE_66_1,DE_BE_66_2,15,min,
+,DE_BE_66_2,DE_BE_66_1,10,min,
+Implant_Gas,,SU128_1,72,min,7.0
+Implant_Gas,,SU128_2,72,min,7.0
+Implant_Gas,,SU128_3,72,min,7.0
+Implant_Gas,,SU132_1,60,min,7.0
+Implant_Gas,,SU132_2,60,min,7.0
+Implant_Gas,,SU132_3,60,min,7.0
+Implant_Gas,,SU91_1,80,min,7.0
+Implant_Gas,,SU91_2,80,min,7.0
+Implant_Gas,,SU91_3,80,min,7.0

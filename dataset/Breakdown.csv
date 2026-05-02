@@ -1,0 +1,12 @@
+﻿DOWN EVENT NAME,DOWN EVENT VALID FOR TYPE,TYPE NAME,DOWN TYPE,TTF DISTRIBUTION,MTTF,MTTF UNITS,TTR DISTRIBUTION,MTTR,MTTR UNITS,FIRST ONE AT DISTRIBUTION,FOA,FOA UNITS
+BREAK_Def_Met,area,Def_Met,time based (calendar),exponential,10080,min,exponential,35.28,min,exponential,10080,min
+BREAK_Dielectric,area,Dielectric,time based (calendar),exponential,10080,min,exponential,604.8,min,exponential,10080,min
+BREAK_Diffusion,area,Diffusion,time based (calendar),exponential,10080,min,exponential,151.2,min,exponential,10080,min
+BREAK_Dry_Etch,area,Dry_Etch,time based (calendar),exponential,10080,min,exponential,231.84,min,exponential,10080,min
+BREAK_Implant,area,Implant,time based (calendar),exponential,10080,min,exponential,604.8,min,exponential,10080,min
+BREAK_Litho,area,Litho,time based (calendar),exponential,10080,min,exponential,705.59,min,exponential,10080,min
+BREAK_Litho_Met,area,Litho_Met,time based (calendar),exponential,10080,min,exponential,35.28,min,exponential,10080,min
+BREAK_Planar,area,Planar,time based (calendar),exponential,10080,min,exponential,201.6,min,exponential,10080,min
+BREAK_TF,area,TF,time based (calendar),exponential,10080,min,exponential,453.6,min,exponential,10080,min
+BREAK_TF_Met,area,TF_Met,time based (calendar),exponential,10080,min,exponential,35.28,min,exponential,10080,min
+BREAK_Wet_Etch,area,Wet_Etch,time based (calendar),exponential,10080,min,exponentcial,221.76,min,exponential,10080,min

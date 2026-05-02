@@ -1,0 +1,53 @@
+{
+  "dataset_dir": "dataset",
+  "route_file_glob": "Route_Product_*.csv",
+  "toolgroups_file": "Toolgroups.csv",
+  "pm_file": "PM.csv",
+  "breakdown_file": "Breakdown.csv",
+  "setups_file": "Setups.csv",
+  "transport_file": "Transport.csv",
+  "release_file": "Lotrelease - variable due dates.csv",
+  "output_dir": "outputs/material_override_example",
+  "random_seed": 42,
+  "max_lots": null,
+  "until_minutes": null,
+  "warmup_minutes": 0.0,
+  "release_scenario": null,
+  "dispatching_rule": "priority_cr_fifo",
+  "sample_process_times": true,
+  "sample_transport_times": true,
+  "wafer_time_mode": "per_wafer",
+  "enable_sampling": true,
+  "enable_rework": true,
+  "enable_transport": true,
+  "enable_batching": false,
+  "enable_cascading": false,
+  "enable_pm": false,
+  "enable_breakdowns": false,
+  "write_event_log": false,
+  "toolgroup_overrides": {
+    "LithoTrack_FE_95": {
+      "number_of_tools": 18
+    }
+  },
+  "transport_override": {
+    "mean": 8.0,
+    "offset": 3.0
+  },
+  "pm_overrides": {
+    "LithoTrack_FE_95_WK": {
+      "repair_mean": 6.0,
+      "repair_offset": 1.0
+    }
+  },
+  "breakdown_overrides": {
+    "BREAK_Litho": {
+      "mean_time_to_repair": 240.0
+    }
+  },
+  "setup_overrides": {
+    "DE_BE_13_1->DE_BE_13_2": {
+      "setup_time": 10.0
+    }
+  }
+}
