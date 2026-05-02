@@ -15,3 +15,4 @@ dependencies = [
 
 [project.scripts]
 smt2020-sim = "src.simulator.cli:main"
+build-dsm = "src.dsm.cli:main"

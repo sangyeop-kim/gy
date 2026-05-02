@@ -132,7 +132,7 @@ SMT2020은 현대 반도체 웨이퍼 팹의 복잡도를 연구용 이산사건
 
 `Setups.csv`는 sequence-dependent setup 시간을 정의한다. 현재 데이터에는 13개 setup 전환 규칙이 있으며 setup time은 7분부터 80분까지 존재한다.
 
-`Transport.csv`는 fab 내부 이송 시간을 정의한다. 현재 데이터는 `Fab`에서 `Fab`으로 이동하는 단일 규칙이며, transport time은 uniform distribution으로 평균 7.5분, offset 2.5분이다. 즉 5-10분 범위의 이송 지연으로 해석할 수 있다.
+`Transport.csv`는 fab 내부에서 한 설비 공정이 끝난 lot이 다음 설비 공정으로 이동하는 이송 시간을 정의한다. 현재 데이터는 `Fab`에서 `Fab`으로 이동하는 단일 규칙이므로 tool group별 위치 matrix가 아니라 모든 연속 공정 사이에 적용되는 공통 설비 간 이동 지연으로 해석한다. Transport time은 uniform distribution으로 평균 7.5분, offset 2.5분이며, 즉 5-10분 범위의 이송 지연이다.
 
 ## 시뮬레이션 모델 관점에서의 해석
 
@@ -218,7 +218,9 @@ override key는 로드된 객체의 ID를 사용한다. Tool group은 `TOOLGROUP
 
 현재 엔진은 release, queueing, dispatching, transport time, stochastic process time, metrology sampling skip, simple rework뿐 아니라 PM, breakdown, batch processing, cascading interval, sequence-dependent setup, CQT violation 추적까지 처리한다. 기본 config는 이 기능들을 켠 상태이며, 필요하면 실험 목적에 맞게 각 flag를 끌 수 있다.
 
-직접 구현 엔진이므로 상용 SMT2020 모델의 세부 tool-level rule을 완전히 동일하게 복제한 것은 아니다. PM과 breakdown은 tool group capacity를 시간에 따라 줄였다가 복구하는 방식으로 반영하고, batch minimum/maximum은 wafer 수 기준으로 lot을 묶으며, setup은 route step의 `SETUP` 상태 전환과 `Setups.csv`의 sequence-dependent setup time을 사용한다.
+Tool group의 물리적 운영 속성은 `Toolgroups.csv`에서 읽어 반영한다. Cascading은 해당 tool group의 `CASCADINGTOOL`이 켜져 있고 route step에 `CASCADING INTERVAL`이 있을 때만 적용하며, batching은 `BACTHINGTOOL`, `BATCHCRITERION`, `BATCHING UNIT`과 route step의 `BATCH MINIMUM`/`BATCH MAXIMUM`을 함께 사용한다. 현재 데이터의 batch criterion인 `Same Product and Same Step`은 같은 제품/같은 step lot만 묶고, batching unit이 `Wafer`이면 wafer 수 기준으로 batch 크기를 계산한다.
+
+직접 구현 엔진이므로 상용 SMT2020 모델의 세부 tool-level rule을 완전히 동일하게 복제한 것은 아니다. PM과 breakdown은 tool group capacity를 시간에 따라 줄였다가 복구하는 방식으로 반영하고, setup은 route step의 `SETUP` 상태 전환과 `Setups.csv`의 sequence-dependent setup time을 사용한다. 원본 `DISPATCHING` 문자열과 `Ranking 1-3`은 보존하지만, 정책 비교 실험에서는 config의 dispatching rule 또는 tool group override rule을 사용한다.
 
 ## 실행 방법
 

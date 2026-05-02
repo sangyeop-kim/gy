@@ -107,9 +107,15 @@ class ToolGroupSpec:
     loading_time: float
     unloading_time: float
     dispatching: str
+    cascading_tool: bool = False
+    batching_tool: bool = False
+    batch_criterion: str | None = None
+    batching_unit: str | None = None
+    location: str | None = None
     ranking_1: str | None = None
     ranking_2: str | None = None
     ranking_3: str | None = None
+    tool_wake_up_ranking: str | None = None
 
 
 @dataclass(frozen=True)

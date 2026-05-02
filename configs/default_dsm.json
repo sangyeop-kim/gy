@@ -1,0 +1,40 @@
+{
+  "simulation_config": "configs/default_simulation.json",
+  "output_dir": "outputs/dsm_analysis",
+  "weights": {
+    "method": "uniform",
+    "release_path": null,
+    "custom": null
+  },
+  "edges": {
+    "window": 5,
+    "decay": 0.35,
+    "sequence_factor": 1.0,
+    "cqt_boost": 3.0,
+    "rework_boost": 1.0,
+    "include_self_edges": false,
+    "exclude_same_area": false
+  },
+  "matrix": {
+    "normalize": "minmax",
+    "threshold": 0.05
+  },
+  "clustering": {
+    "method": "directed_louvain",
+    "n_clusters": 8,
+    "hierarchical_linkage": "ward",
+    "mcl": {
+      "expansion": 3,
+      "inflation": 1.2,
+      "self_loop": 5.0,
+      "max_iter": 200,
+      "tol": 1e-7
+    },
+    "louvain": {
+      "resolution": 1.0,
+      "seed": 0
+    }
+  },
+  "visualize": true,
+  "top_n_visual": null
+}

@@ -258,7 +258,7 @@ class Simulator:
                     return
                 lead_lot = policy.select_lot(candidates, self.now)
                 tool = self._select_tool(toolgroup, lead_lot.current_step)
-                if self._is_batch_step(lead_lot.current_step):
+                if self._is_batch_step(toolgroup, lead_lot.current_step):
                     lots = self._select_batch_lots(toolgroup, lead_lot, tool, policy)
                     if lots is None:
                         deferred_lot_ids.add(lead_lot.id)
@@ -282,7 +282,7 @@ class Simulator:
             lot.waiting_since = None
         lead_lot = lots[0]
         setup_minutes = self._setup_duration(tool, lead_lot.current_step)
-        process_minutes = self._step_duration(lead_lot.current_step, lead_lot, tuple(lots))
+        process_minutes = self._step_duration(toolgroup, lead_lot.current_step, lead_lot, tuple(lots))
         completion_time = self.now + setup_minutes + process_minutes
         tool.start(tuple(lot.id for lot in lots), completion_time)
         self._started_operations_count += len(lots)
@@ -321,14 +321,21 @@ class Simulator:
 
     def _after_step_completion(self, lot: Lot) -> None:
         self._check_cqt_start(lot)
-        lot.step_index = self._next_step_index(lot)
+        from_toolgroup = lot.current_step.toolgroup
+        next_step_index = self._next_step_index(lot)
+        lot.step_index = next_step_index
         lot.current_toolgroup = None
         if lot.is_complete:
             lot.completed_time = self.now
             self._completed_lots_count += 1
             self._log_lot("complete_lot", lot.id)
         else:
-            self.calendar.push(self.now + self._transport_duration(), "lot_arrival", target=lot.id)
+            to_toolgroup = lot.current_step.toolgroup
+            self.calendar.push(
+                self.now + self._transport_duration(from_toolgroup, to_toolgroup),
+                "lot_arrival",
+                target=lot.id,
+            )
 
     def _next_step_index(self, lot: Lot) -> int:
         step = lot.current_step
@@ -360,18 +367,17 @@ class Simulator:
         compatible = [
             self.lots[lot_id]
             for lot_id in toolgroup.waiting_lot_ids
-            if self.lots[lot_id].current_step == step
+            if self._batch_compatible(toolgroup, lead_lot, self.lots[lot_id])
         ]
         selected: list[Lot] = []
         remaining = compatible
-        while remaining and sum(lot.wafers_per_lot for lot in selected) < maximum:
+        while remaining and self._batch_quantity(toolgroup, selected) < maximum:
             lot = policy.select_lot(remaining, self.now, tool)
-            if sum(item.wafers_per_lot for item in selected) + lot.wafers_per_lot > maximum:
+            if self._batch_quantity(toolgroup, [*selected, lot]) > maximum:
                 break
             selected.append(lot)
             remaining = [item for item in remaining if item.id != lot.id]
-        wafers = sum(lot.wafers_per_lot for lot in selected)
-        if wafers >= minimum:
+        if self._batch_quantity(toolgroup, selected) >= minimum:
             return selected
         return None
 
@@ -394,32 +400,53 @@ class Simulator:
             return False
         for lot_id in toolgroup.waiting_lot_ids:
             lot = self.lots[lot_id]
-            if not self._is_batch_step(lot.current_step):
+            if not self._is_batch_step(toolgroup, lot.current_step):
                 return True
-            if self._batch_minimum_is_available(toolgroup, lot.current_step):
+            if self._batch_minimum_is_available(toolgroup, lot):
                 return True
         return False
 
-    def _batch_minimum_is_available(self, toolgroup: ToolGroup, step: RouteStep) -> bool:
+    def _batch_minimum_is_available(self, toolgroup: ToolGroup, lead_lot: Lot) -> bool:
+        step = lead_lot.current_step
         minimum = step.batch_minimum or 0.0
         maximum = step.batch_maximum or float("inf")
-        wafers = 0
+        quantity = 0
         for lot_id in toolgroup.waiting_lot_ids:
             lot = self.lots[lot_id]
-            if lot.current_step == step and lot.wafers_per_lot <= maximum:
-                wafers += lot.wafers_per_lot
-            if wafers >= minimum:
+            if self._batch_compatible(toolgroup, lead_lot, lot):
+                lot_quantity = self._batch_lot_quantity(toolgroup, lot)
+                if lot_quantity <= maximum:
+                    quantity += lot_quantity
+            if quantity >= minimum:
                 return True
         return minimum <= 0
 
-    def _is_batch_step(self, step: RouteStep) -> bool:
+    def _is_batch_step(self, toolgroup: ToolGroup, step: RouteStep) -> bool:
         return (
             self.config.enable_batching
+            and toolgroup.spec.batching_tool
             and step.processing_unit.lower() == "batch"
             and step.batch_minimum is not None
         )
 
-    def _step_duration(self, step: RouteStep, lot: Lot, batch_lots: tuple[Lot, ...]) -> float:
+    def _batch_compatible(self, toolgroup: ToolGroup, lead_lot: Lot, candidate: Lot) -> bool:
+        if candidate.current_step != lead_lot.current_step:
+            return False
+        criterion = (toolgroup.spec.batch_criterion or "").strip().lower()
+        if criterion == "same product and same step":
+            return candidate.product_name == lead_lot.product_name
+        return True
+
+    def _batch_quantity(self, toolgroup: ToolGroup, lots: list[Lot]) -> float:
+        return sum(self._batch_lot_quantity(toolgroup, lot) for lot in lots)
+
+    def _batch_lot_quantity(self, toolgroup: ToolGroup, lot: Lot) -> float:
+        unit = (toolgroup.spec.batching_unit or "wafer").strip().lower()
+        if unit in {"lot", "lots"}:
+            return 1.0
+        return float(lot.wafers_per_lot)
+
+    def _step_duration(self, toolgroup: ToolGroup, step: RouteStep, lot: Lot, batch_lots: tuple[Lot, ...]) -> float:
         process = step.process_time
         if self.config.sample_process_times and (process.distribution or "").lower() == "uniform":
             base = self.random.uniform_around(process.mean, process.offset)
@@ -427,16 +454,23 @@ class Simulator:
             base = process.mean
         unit = step.processing_unit.lower()
         if unit == "wafer" and self.config.wafer_time_mode == "per_wafer":
-            if self.config.enable_cascading and step.cascading_interval is not None:
+            if self._uses_cascading(toolgroup, step):
                 base += max(0, lot.wafers_per_lot - 1) * step.cascading_interval
             else:
                 base *= lot.wafers_per_lot
-        elif unit == "batch" and self.config.enable_batching:
+        elif unit == "batch" and self._is_batch_step(toolgroup, step):
             batch_wafers = sum(batch_lot.wafers_per_lot for batch_lot in batch_lots)
-            if self.config.enable_cascading and step.cascading_interval is not None:
+            if self._uses_cascading(toolgroup, step):
                 base += max(0, batch_wafers - 1) * step.cascading_interval
         spec = self.model.toolgroup_specs[step.toolgroup]
         return max(0.0, base + spec.loading_time + spec.unloading_time)
+
+    def _uses_cascading(self, toolgroup: ToolGroup, step: RouteStep) -> bool:
+        return (
+            self.config.enable_cascading
+            and toolgroup.spec.cascading_tool
+            and step.cascading_interval is not None
+        )
 
     def _setup_duration_preview(self, tool: Tool, step: RouteStep) -> float:
         if step.setup is None:
@@ -456,10 +490,12 @@ class Simulator:
             tool.setup_state = step.setup
         return duration
 
-    def _transport_duration(self) -> float:
+    def _transport_duration(self, from_toolgroup: str, to_toolgroup: str) -> float:
         transport = self.model.transport
         if not self.config.enable_transport or transport is None:
             return 0.0
+        # The SMT2020 file has one Fab-to-Fab rule, so every step-to-step transfer uses it.
+        _ = (from_toolgroup, to_toolgroup)
         if self.config.sample_transport_times and transport.distribution.lower() == "uniform":
             return max(0.0, self.random.uniform_around(transport.mean, transport.offset))
         return max(0.0, transport.mean)

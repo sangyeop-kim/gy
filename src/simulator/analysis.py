@@ -256,19 +256,17 @@ def lot_snapshot_frame(lots: Iterable[Lot], now: float) -> pd.DataFrame:
 
 def waiting_lots_to_frame(simulator: Simulator) -> pd.DataFrame:
     rows = []
-    compatible_wafers: dict[tuple[str, int], int] = {}
-    compatible_lots: dict[tuple[str, int], int] = {}
-    for toolgroup in simulator.toolgroups.values():
-        for lot_id in toolgroup.waiting_lot_ids:
-            lot = simulator.lots[lot_id]
-            key = (toolgroup.spec.name, id(lot.current_step))
-            compatible_wafers[key] = compatible_wafers.get(key, 0) + lot.wafers_per_lot
-            compatible_lots[key] = compatible_lots.get(key, 0) + 1
     for toolgroup in simulator.toolgroups.values():
         for lot_id in toolgroup.waiting_lot_ids:
             lot = simulator.lots[lot_id]
             step = lot.current_step
-            key = (toolgroup.spec.name, id(step))
+            compatible = [
+                simulator.lots[candidate_id]
+                for candidate_id in toolgroup.waiting_lot_ids
+                if _analysis_batch_compatible(toolgroup.spec, lot, simulator.lots[candidate_id])
+            ]
+            compatible_wafers = sum(candidate.wafers_per_lot for candidate in compatible)
+            compatible_quantity = sum(_analysis_batch_lot_quantity(toolgroup.spec, candidate) for candidate in compatible)
             rows.append(
                 {
                     "lot_id": lot.id,
@@ -281,19 +279,39 @@ def waiting_lots_to_frame(simulator: Simulator) -> pd.DataFrame:
                     "step_number": step.step_number,
                     "step_description": step.description,
                     "processing_unit": step.processing_unit,
+                    "batching_tool": toolgroup.spec.batching_tool,
+                    "batch_criterion": toolgroup.spec.batch_criterion,
+                    "batching_unit": toolgroup.spec.batching_unit,
                     "batch_minimum": step.batch_minimum,
                     "batch_maximum": step.batch_maximum,
                     "wafers_per_lot": lot.wafers_per_lot,
-                    "compatible_waiting_lots": compatible_lots[key],
-                    "compatible_waiting_wafers": compatible_wafers[key],
+                    "compatible_waiting_lots": len(compatible),
+                    "compatible_waiting_wafers": compatible_wafers,
+                    "compatible_batch_quantity": compatible_quantity,
                     "batch_minimum_satisfied": (
-                        compatible_wafers[key] >= step.batch_minimum
+                        compatible_quantity >= step.batch_minimum
                         if step.batch_minimum is not None
                         else None
                     ),
                 }
             )
     return pd.DataFrame(rows)
+
+
+def _analysis_batch_compatible(spec, lead_lot: Lot, candidate: Lot) -> bool:
+    if candidate.current_step != lead_lot.current_step:
+        return False
+    criterion = (spec.batch_criterion or "").strip().lower()
+    if criterion == "same product and same step":
+        return candidate.product_name == lead_lot.product_name
+    return True
+
+
+def _analysis_batch_lot_quantity(spec, lot: Lot) -> float:
+    unit = (spec.batching_unit or "wafer").strip().lower()
+    if unit in {"lot", "lots"}:
+        return 1.0
+    return float(lot.wafers_per_lot)
 
 
 def waiting_step_summary(waiting_df: pd.DataFrame) -> pd.DataFrame:
@@ -307,6 +325,9 @@ def waiting_step_summary(waiting_df: pd.DataFrame) -> pd.DataFrame:
                 "step_number",
                 "step_description",
                 "processing_unit",
+                "batching_tool",
+                "batch_criterion",
+                "batching_unit",
                 "batch_minimum",
                 "batch_maximum",
             ],

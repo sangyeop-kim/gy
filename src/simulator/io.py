@@ -128,9 +128,15 @@ def _load_toolgroups(path: Path) -> dict[str, ToolGroupSpec]:
             loading_time=_float(row.get("LOADINGTIME"), default=0.0),
             unloading_time=_float(row.get("UNLOADINGTIME"), default=0.0),
             dispatching=_text(row.get("DISPATCHING", "")),
+            cascading_tool=_yes_no(row.get("CASCADINGTOOL")),
+            batching_tool=_yes_no(row.get("BACTHINGTOOL")),
+            batch_criterion=_optional_text(row.get("BATCHCRITERION")),
+            batching_unit=_optional_text(row.get("BATCHING UNIT")),
+            location=_optional_text(row.get("TOOLGROUPLOCATION")),
             ranking_1=_optional_text(row.get("Ranking 1")),
             ranking_2=_optional_text(row.get("Ranking 2")),
             ranking_3=_optional_text(row.get("Ranking 3")),
+            tool_wake_up_ranking=_optional_text(row.get("TOOL WAKE UP Ranking")),
         )
         specs[spec.name] = spec
     return specs
@@ -427,6 +433,12 @@ def _optional_int(value: Any) -> int | None:
     if _is_missing(value):
         return None
     return int(float(value))
+
+
+def _yes_no(value: Any) -> bool:
+    if _is_missing(value):
+        return False
+    return str(value).strip().lower() in {"yes", "y", "true", "1"}
 
 
 def _is_missing(value: Any) -> bool:
