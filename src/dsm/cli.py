@@ -103,6 +103,12 @@ def main() -> None:
     parser.add_argument("--method", default=None,
                         choices=["hierarchical", "mcl", "directed_louvain"],
                         help="override clustering.method (default: directed_louvain)")
+    parser.add_argument("--window", type=int, default=None,
+                        help="override edges.window — max lag of sequence transitions "
+                             "to consider (default: 5)")
+    parser.add_argument("--decay", type=float, default=None,
+                        help="override edges.decay — per-step decay factor for lag>1 "
+                             "transitions, weight ∝ decay^(lag-1) (default: 0.35)")
     parser.add_argument("--sequence-factor", type=float, default=None,
                         help="override edges.sequence_factor (default: 1.0)")
     parser.add_argument("--cqt-boost", type=float, default=None,
@@ -122,6 +128,8 @@ def main() -> None:
         config = config.with_overrides(matrix=dc_replace(config.matrix, threshold=args.threshold))
 
     edge_overrides = {k: v for k, v in {
+        "window": args.window,
+        "decay": args.decay,
         "cqt_boost": args.cqt_boost,
         "rework_boost": args.rework_boost,
         "sequence_factor": args.sequence_factor,

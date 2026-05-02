@@ -11,8 +11,11 @@ dependencies = [
     "openpyxl>=3.1.5",
     "pandas>=3.0.2",
     "scipy>=1.17.1",
+    "torch>=2.7.0",
 ]
 
 [project.scripts]
 smt2020-sim = "src.simulator.cli:main"
 build-dsm = "src.dsm.cli:main"
+train-rl-dqn = "src.rl.train_dqn:main"
+simulate-rl-dqn = "src.rl.simulate_dqn:main"

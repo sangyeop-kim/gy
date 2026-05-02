@@ -1,4 +1,5 @@
 from collections import defaultdict
+from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import timedelta
 from typing import Any, Callable
@@ -23,9 +24,10 @@ class SimulationResult:
 class Simulator:
     """Discrete-event simulator assembled from release, route, tool, and policy objects."""
 
-    def __init__(self, model: FabModel, config: SimulationConfig) -> None:
+    def __init__(self, model: FabModel, config: SimulationConfig, dispatch_selector: Any | None = None) -> None:
         self.model = model
         self.config = config
+        self.dispatch_selector = dispatch_selector
         self.random = RandomStream(config.random_seed)
         self.dispatch_policy = DispatchPolicy(config.dispatching_rule)
         self.now = 0.0
@@ -227,6 +229,8 @@ class Simulator:
         toolgroup.add_waiting_lot(lot_id)
         self._log_lot("arrive", lot_id, toolgroup.spec.name)
         self._check_cqt_end(lot)
+        if self.dispatch_selector is not None:
+            self.dispatch_selector.on_lot_arrival(simulator=self, lot=lot, now=self.now)
         self._request_dispatch(toolgroup.spec.name)
 
     def _request_dispatch(self, toolgroup_name: str) -> None:
@@ -256,7 +260,7 @@ class Simulator:
                 )
                 if not candidates:
                     return
-                lead_lot = policy.select_lot(candidates, self.now)
+                lead_lot = self._select_dispatch_lot(toolgroup, candidates, policy)
                 tool = self._select_tool(toolgroup, lead_lot.current_step)
                 if self._is_batch_step(toolgroup, lead_lot.current_step):
                     lots = self._select_batch_lots(toolgroup, lead_lot, tool, policy)
@@ -275,6 +279,24 @@ class Simulator:
             toolgroup.idle_tools,
             key=lambda tool: (self._setup_duration_preview(tool, step), tool.index),
         )
+
+    def _select_dispatch_lot(
+        self,
+        toolgroup: ToolGroup,
+        candidates: Iterable[Lot],
+        policy: DispatchPolicy,
+        tool: Tool | None = None,
+    ) -> Lot:
+        lots = tuple(candidates)
+        if self.dispatch_selector is not None:
+            return self.dispatch_selector.select_lot(
+                simulator=self,
+                toolgroup=toolgroup,
+                candidates=lots,
+                fallback_policy=policy,
+                tool=tool,
+            )
+        return policy.select_lot(lots, self.now, tool)
 
     def _start_operation(self, toolgroup: ToolGroup, tool: Tool, lots: list[Lot]) -> None:
         for lot in lots:
@@ -317,6 +339,8 @@ class Simulator:
             lot = self.lots[lot_id]
             self._log_lot(event_name, lot_id, toolgroup_name, tool_index)
             self._after_step_completion(lot)
+            if self.dispatch_selector is not None and lot.is_complete:
+                self.dispatch_selector.on_lot_complete(simulator=self, lot=lot, now=self.now)
         self._request_dispatch(toolgroup_name)
 
     def _after_step_completion(self, lot: Lot) -> None:
@@ -372,7 +396,7 @@ class Simulator:
         selected: list[Lot] = []
         remaining = compatible
         while remaining and self._batch_quantity(toolgroup, selected) < maximum:
-            lot = policy.select_lot(remaining, self.now, tool)
+            lot = self._select_dispatch_lot(toolgroup, remaining, policy, tool)
             if self._batch_quantity(toolgroup, [*selected, lot]) > maximum:
                 break
             selected.append(lot)
