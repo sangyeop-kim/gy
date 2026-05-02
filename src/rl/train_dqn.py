@@ -22,14 +22,23 @@ def main() -> None:
     parser.add_argument("--max-lots", type=int, default=200)
     parser.add_argument("--eval-max-lots", type=int, default=500)
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--hidden-dim", type=int, default=128)
+    parser.add_argument("--hidden-dim", type=int, default=64)
     parser.add_argument("--hidden-layers", type=int, default=2)
     parser.add_argument("--learning-rate", type=float, default=3e-4)
-    parser.add_argument("--batch-size", type=int, default=256)
+    parser.add_argument("--batch-size", type=int, default=1024,
+                        help="Train batch size sampled from GPU replay buffer (default: 1024)")
+    parser.add_argument("--train-every", type=int, default=64,
+                        help="Run a training update once every N rewards (default: 64)")
+    parser.add_argument("--replay-capacity", type=int, default=100_000)
     parser.add_argument("--epsilon-start", type=float, default=1.0)
     parser.add_argument("--epsilon-end", type=float, default=0.05)
     parser.add_argument("--epsilon-decay", type=float, default=0.9995)
-    parser.add_argument("--device", default="auto", help="auto, cpu, cuda, cuda:0, or mps")
+    parser.add_argument("--device", default="auto",
+                        help="Training device: auto / cpu / cuda / cuda:0 / mps (default: auto)")
+    parser.add_argument("--inference-device", default="cpu",
+                        help="Inference (act) device. cpu is usually faster for small MLPs (default: cpu)")
+    parser.add_argument("--inference-sync-every", type=int, default=200,
+                        help="Sync training network → inference network every N train steps (default: 200)")
     parser.add_argument("--fallback-policy", default="priority_cr_fifo")
     parser.add_argument("--fallback-probability", type=float, default=0.05)
     parser.add_argument(
@@ -56,11 +65,14 @@ def main() -> None:
             hidden_layers=args.hidden_layers,
             learning_rate=args.learning_rate,
             batch_size=args.batch_size,
+            replay_capacity=args.replay_capacity,
             epsilon_start=args.epsilon_start,
             epsilon_end=args.epsilon_end,
             epsilon_decay=args.epsilon_decay,
             seed=args.seed,
             device=args.device,
+            inference_device=args.inference_device,
+            inference_sync_every=args.inference_sync_every,
         )
     )
     base_config = SimulationConfig.from_json(args.config)
@@ -96,6 +108,7 @@ def main() -> None:
             encoder,
             explore=True,
             train_online=True,
+            train_every=args.train_every,
             fallback_probability=args.fallback_probability,
         )
         simulator = Simulator(model, config, dispatch_selector=selector)
@@ -126,7 +139,7 @@ def main() -> None:
             "blocked_reason": simulator.blocked_reason,
             "decisions": selector.decisions,
             "rewards": selector.rewards,
-            "replay_size": len(agent.replay),
+            "replay_size": agent.replay_size(),
             "training_steps": agent.training_steps,
             "epsilon": agent.epsilon,
             "device": str(agent.device),
@@ -242,7 +255,7 @@ def _make_training_progress_callback(
             f"tools busy/idle/down={progress['busy_tools']:,}/{progress['idle_tools']:,}/{progress['down_tools']:,} "
             f"pending_events={progress['pending_events']:,} "
             f"decisions={selector.decisions:,} rewards={selector.rewards:,} "
-            f"replay={len(agent.replay):,} train_steps={agent.training_steps:,} "
+            f"replay={agent.replay_size():,} train_steps={agent.training_steps:,} "
             f"epsilon={agent.epsilon:.4f} "
             f"loss={avg_loss if avg_loss is not None else '-'} "
             f"reward={recent_reward if recent_reward is not None else '-'} "
